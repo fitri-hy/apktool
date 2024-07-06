@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.tailwindcss.com"></script>
+    <title>Decimal & Smali Value Converter</title>
+</head>
+<body class="p-4 bg-slate-100 py-9">
+    <h1 class="text-center font-bold text-4xl">Decimal & Smali Converter</h1>
+    
+    <section class="bg-white rounded-lg p-4 mt-9 shadow">
+        <h2 class="text-xl font-semibold mb-2">Decimal to Smali</h2>
+        <div class="md:flex md:gap-6">
+			<textarea class="w-full bg-gray-50 border p-2 rounded-md" id="decimalInput" rows="4" placeholder="Enter your decimal value here..."></textarea>
+			<textarea class="mt-6 md:mt-0 w-full bg-gray-50 border p-2 rounded-md"  id="smaliValue" rows="4" readonly></textarea>
+		</div>
+        <div class="flex justify-center mt-4">
+			<button class="bg-blue-500 rounded-lg px-4 py-2 text-white inline-block" id="convertDecimalButton">Convert to Smali</button>
+		</div>
+	</section>
+    
+    <section class="bg-white rounded-lg p-4 mt-9 shadow">
+        <h2 class="text-xl font-semibold mb-2">Smali to Decimal</h2>
+		<div class="md:flex md:gap-6">
+			<textarea class="w-full bg-gray-50 border p-2 rounded-md" id="smaliInput" rows="4" placeholder="Enter your Smali value here..."></textarea>
+			<textarea class="w-full bg-gray-50 border p-2 rounded-md" id="decimalValue" rows="4" readonly></textarea>
+		</div>
+        <div class="flex justify-center mt-4">
+			<button class="bg-blue-500 rounded-lg px-4 py-2 text-white inline-block" id="convertSmaliButton">Convert to Decimal</button>
+		</div>
+	</section>
+    
+    <script>
+	document.getElementById('convertDecimalButton').addEventListener('click', function() {
+    const decimalInput = document.getElementById('decimalInput').value;
+    const smaliValue = convertDecimalToSmali(decimalInput);
+    document.getElementById('smaliValue').value = smaliValue;
+});
+
+document.getElementById('convertSmaliButton').addEventListener('click', function() {
+    const smaliInput = document.getElementById('smaliInput').value;
+    const decimalValue = convertSmaliToDecimal(smaliInput);
+    document.getElementById('decimalValue').value = decimalValue;
+});
+
+function convertDecimalToSmali(decimalValue) {
+    decimalValue = decimalValue.trim();
+    
+    try {
+        const num = parseInt(decimalValue, 10);
+        if (isNaN(num)) {
+            throw new Error('Invalid decimal value');
+        }
+        const hexValue = num.toString(16).toUpperCase();
+        return `0x${hexValue}`;
+    } catch (error) {
+        return `Error: ${error.message}`;
+    }
+}
+
+function convertSmaliToDecimal(smaliValue) {
+    smaliValue = smaliValue.trim();
+    
+    try {
+        if (smaliValue.startsWith('0x')) {
+            smaliValue = smaliValue.slice(2);
+        }
+        const num = parseInt(smaliValue, 16);
+        if (isNaN(num)) {
+            throw new Error('Invalid Smali value');
+        }
+        return num.toString();
+    } catch (error) {
+        return `Error: ${error.message}`;
+    }
+}
+
+	</script>
+</body>
+</html>

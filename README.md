@@ -10,7 +10,7 @@ APKTool is a tool that allows you to decompile and recompile APKs with support f
 - **User Friendly Interface**: Command line based tool for ease of use.
 
 ## Recomended
-- **Java**: [Java JDK]([https://www.python.org/downloads/](https://www.oracle.com/java/technologies/downloads/))
+- **Java**: [Java JDK](https://www.python.org/downloads/)
 - **Python**: [Python](https://www.python.org/downloads/) 3.12.x
 - **Elixir**: [Elixir](https://elixir-lang.org/install.html) 1.16.x
 - **Go**: [Go](https://golang.org/dl/) 1.22.x
